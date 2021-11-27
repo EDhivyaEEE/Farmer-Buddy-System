@@ -1,0 +1,83 @@
+/<Creating database>/
+Create database farmer_buddy_system;
+use farmer_buddy_system;
+
+/<Creating tables>/
+Create table user(user_id int not null auto_increment primary key,user_name varchar(30),user_phonenumber bigint,user_email varchar(30),user_city varchar(30),user_street varchar(30),user_zip int,user_password varchar(20),user_accuntnumber varchar(14));
+
+<inserting user values>
+insert into user values(null,'Dhivya','9344337941','edhivya536@gmail.com','villupuram','yadhavar_street','607101','dhiv@21','12345678909876');
+insert into user values(null,'jayaram','8643337541','jayaram23@gmail.com','chennai','alamathi_street','600052','jayaram@21','54321678909876');
+insert into user values(null,'sangavi','8674337947','sangavi342@gmail.com','villupuram','murugantemple_street','607102','san@25','65432178909876');
+insert into user values(null,'sujitha','8944337941','suji34@gmail.com','thiruvallur','veltech_street','600054','suji@21','76543215609876');
+
+/<delete fuction>/
+delete from user where user_id=1;
+
+/<printing user table>/
+select*from user;
+
+/<creating farmer table>/
+create table farmer(farmer_id int not null auto_increment primary key,farmer_product varchar(50),farmer_phno bigint,farmer_email varchar(30),farmer_password varchar(20));
+
+/<inserting farmer values>/
+insert into farmer values(null,'fruits,vegitables','7094429458','jack@gmail.com','jach@21');
+insert into farmer values(null,'fruits,lattuce','9874429443','cooper@gmail.com','cooper@22');
+insert into farmer values(null,'seeds,vegitables','8644429458','sri@gmail.com','sri#43');
+
+/<printing farmer table>/
+select*from farmer;
+
+/<creating product table>/
+create table product(product_id int not null auto_increment primary key,product_name varchar(50),product_quantity varchar(10),prduct_price varchar(10),product_categories varchar(30),farmer_id int not null,foreign key(farmer_id) references farmer(farmer_id));
+
+/<inserting product values>/
+insert into product values(null,'mango,apple','2kg','200Rs','fruits',1);
+insert into product values(null,'mango,orange,apple','1kg','1000Rs','fruits',2);
+insert into product values(null,'onion,potato','1kg','90Rs','vegitables',3);
+
+/<printing product table>/
+select*from product;
+
+/<creating order table>/
+create table order_details(order_id int not null auto_increment primary key,user_id int not null,product_id int not null,order_date date,delivery_date date,foreign key(user_id) references user(user_id),foreign key(product_id) references product(product_id));
+
+/<inserting order values>/
+insert into order_details values(null,1,1,'2021-11-01','2021-11-05');
+insert into order_details values(null,2,2,'2021-11-06','2021-11-10');
+insert into order_details values(null,1,1,'2021-11-11','2021-11-15');
+
+/<printing order table>/
+select*from order_details;
+
+/<creating feedback table>/
+create table feedback(feedback_id int not null auto_increment primary key,user_id int not null,user_comment varchar(100),feedback_date date,foreign key(user_id) references user(user_id));
+
+/<inserting feedback valuse>/
+insert into feedback values(null,1,'product is good','2021-11-05');
+insert into feedback values(null,2,'customer happy','2021-11-10');
+insert into feedback values(null,3,'product is good quality','2021-11-15');
+
+/<printing feedback table>/
+select*from feedback;
+
+/<join function>/
+select farmer_product,product_name from product inner join farmer on farmer.farmer_id=product.farmer_id;
+select user_name,user_phonenumber,user_comment from feedback inner join user on user.user_id=feedback.user_id;
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+ 
+  
+
